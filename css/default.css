@@ -1,0 +1,526 @@
+﻿.container {
+padding: 80px 120px;
+}
+
+.person {
+border: 10px solid transparent;
+margin-bottom: 25px;
+width: 80%;
+height: 80%;
+opacity: 0.7;
+}
+
+.person:hover {
+border-color: #ccffcc;
+}
+
+.badge
+{
+	font-weight: normal;
+    font-size: 1em;
+	background-color:#ff6600;
+	color:#fff;
+    cursor: pointer; 
+    cursor: hand;
+}
+
+.badge_blue
+{
+	background-color:#005395;
+}
+
+.btn {
+padding: 0px 5px 0px 5px;
+color: #000000;
+border-radius: 0;
+transition: .2s;
+}
+
+.btn:hover, .btn:focus {
+	background-color: #ccffcc;
+}
+
+.btn-dashboard-active 
+{
+	background-color:#4b4b4b;
+	padding: 20px 5px 20px 10px;
+	margin: 0px 0px 0px 0px;
+	color: #ffffff;
+	font-size: 1.2em;
+	border-radius: 0px 0px 0px 0px;
+}
+
+.btn-dashboard 
+{
+	background-color:#343434;
+	padding: 20px 5px 20px 10px;
+	margin: 0px 0px 0px 0px;
+	color: #999;
+	font-size: 1.2em;
+	border-radius: 0px 0px 0px 0px;
+}
+
+.btn-flag
+{
+    font-size: .9em;
+    border: 1px solid #ccc;
+    margin: 0px 5px 0px 0px;
+    font-weight:bold;
+    background-color:#ffcc00;       
+}
+
+.optional 
+{
+	color:#999;
+	font-style: italic;
+}
+
+.context-menu 
+{
+	left:100px;
+}
+
+.nav-tabs li a {
+color: #777;
+}
+
+.form-control 
+{
+	background-color:#ffffff;
+	padding: 0px 0px 0px 0px;
+	color: #000;
+	font-size: 1em;
+	border-radius: 0px 0px 0px 0px;	
+	border: 1px solid #ccc;
+	height: 1.8em;
+}
+
+.navbar {
+margin-bottom: 0;
+background-color: #005395;
+border: 0;
+font-size: 1em !important;
+opacity: 1.0;
+}
+
+.navbar li a, .navbar .navbar-brand {
+color: #fff !important;
+}
+
+.navbar-nav li a:hover {
+color: #ccffcc !important;
+}
+
+.navbar-nav li.active a {
+color: #000 !important;
+background-color: #45af32 !important;
+}
+
+.navbar-default .navbar-toggle {
+border-color: transparent;
+}
+
+.open .dropdown-toggle {
+color: #fff;
+background-color: #555 !important;
+}
+
+.dropdown-menu li a {
+color: #000 !important;
+}
+
+.dropdown-menu li a:hover {
+color: #000 !important;
+background-color: #ccffcc !important;
+}
+
+html, body, .container-fluid {
+height: 100%;
+/*font-family: "Eras ITC", "Eras Light ITC", sans-serif;*/
+font-family: Arial, Helvetica, sans-serif;
+font-size: .95em;
+background-color:#4b4b4b;
+}
+
+body 
+{
+ width:98%;
+}
+
+.panel, .panel-body
+{
+	border: 0px;
+	background-color: #fff;
+}
+
+thead 
+{
+	line-height:1em;
+	padding: 0px;
+}
+
+.hiddenRow 
+{
+    padding: 0 !important;
+}
+
+/*START DIV TABLE CSS */
+.rTable 
+{
+display: table;
+width: 100%;
+border-collapse:collapse; 
+cursor: pointer; 
+cursor: hand;
+}
+
+/* Define the default color for all the table rows */
+.rTable tr
+{
+background: #ffffff;
+}
+
+/* Define the hover highlight color for the table row */
+.cssTableRow:hover>td, .cssTableRow:hover>div 
+{
+	background-color: #ccffcc;
+}
+
+.rTableRow {
+display: table-row;
+}
+
+.rTableHeading {
+display: table-header-group;
+background-color: #ddd;
+font-weight:1000;
+}
+
+.rTableCell{
+	display: table-cell;
+	padding: 3px 10px;
+	background-color:#ffffff;
+	border-bottom: 1px solid #ccc;
+    white-space: nowrap;
+}
+
+.rTableCellOdd{
+	display: table-cell;
+	padding: 3px 10px;
+	background-color:#edeae0;
+	border-bottom: 1px solid #ccc;
+    white-space: nowrap;
+}
+
+.rTableHead {
+	display: table-cell;
+	padding: 3px 10px;
+	border-bottom: 1px solid #ccc;
+	color: #0aa611;
+	background-color: #ffffff;
+    white-space: nowrap;
+}
+
+.rTableFoot {
+display: table-footer-group;
+font-weight: bold;
+background-color: #ddd;
+}
+
+.rTableBody {
+display: table-row-group;
+}
+/*END DIV TABLE CSS*/
+
+
+/* WIDGET CONTAINER START*/
+.widget_container {
+padding: 10px;
+width: 98%;
+}
+
+.widgetToolBar 
+{
+font-family: "Eras ITC", "Eras Light ITC", sans-serif;
+background-image: url("../images/widget_toolbar_background.gif");
+background-repeat: repeat-x;
+height:2em;
+line-height:2em;
+padding: 0px 0px 0px 5px;
+}
+
+.widgetTable 
+{
+background-color: #f6f6f4;
+}
+
+.widgetTableHeader 
+{
+    color: #0aa611;
+    font-size: 1em;
+    line-height:1.5em;
+}
+
+.widgetTableLabel 
+{
+    padding: 1px 1px 3px 15px;
+    color: #0aa611;
+    font-weight:normal;
+}
+
+.widgetTableData 
+{
+    padding: 1px 1px 3px 1px;
+    color: #333;
+}
+
+.widget-form-control 
+{
+	background-color:#ffffff;	
+}
+
+.tab-pane 
+{
+padding: 10px;
+background-color: #fff;
+border-bottom: 1px solid #000;
+}
+
+.tab-pane-box 
+{
+background-color: #f6f6f4;
+padding: 10px;
+}
+/* WIDGET CONTAINER END*/
+
+/* MODAL START */
+#lightbox 
+{
+	margin-top:3em;
+}
+
+.modal-backdrop
+{
+    opacity:0.75 !important;
+}
+
+.modal-dialog
+{
+	width:80%;
+}
+
+.modal-content 
+{
+	border-radius: 0px;
+}
+
+.modal-header 
+{
+	border: 0;
+	font-size: 1em !important;
+	border-radius: 0em 0em 0em 0em;
+	padding: 0em 0em 0em 0em;
+	margin: 0em 0em 0em 0em;
+	float: right;
+}
+
+.modal-body 
+{
+	background-color: #f6f6f4;
+	padding: 0em 1em 1em 1em;
+	margin: 0em 0em 0em 0em;
+	float: right;
+	width:100%;
+}
+
+.modal-buttons 
+{
+	text-align: right;
+    width:100%;
+    background-color: #f6f6f4;
+	float: right;
+	padding:.5em;
+	margin: 0em 0em 0em 0em;
+}
+/* MODAL END */
+
+.vertical-menu 
+{
+background-color:#343434;
+height:95vh;
+padding: 20px 0px 0px 0px;
+}
+
+/*DROPDOWN SUB-MENU START*/
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    right: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+/*
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+*/
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+/*DROPDOWN SUB-MENU END*/
+
+.selected_row 
+{
+	/*background-color: #99ff99;*/
+	background: #99ff99;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th 
+{
+	background-color: #ccffcc;
+	cursor: pointer;
+	cursor: hand; 
+}
+
+.table-hover tbody tr td
+{
+    padding: 3px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.right-text 
+{
+	text-align:right;
+}
+
+.center-text 
+{
+	text-align:center;
+}
+
+.bold-text 
+{
+font-weight: bold;
+}
+
+.widget-border-right
+{
+border-right: 1px dotted #ccc;
+}
+
+.widget-border-left
+{
+border-left: 1px dotted #ccc;
+}
+
+.hideHrefBlue 
+{
+	color:#000;
+}
+
+label
+{
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	color: #0aa611;
+	font-size: 1em;
+	line-height:1em;
+	font-weight: 400;
+}
+
+input.form-control
+{
+	background-color:#fff;
+	color:000;
+	border: 1px solid #ccc;
+}
+
+[data-notify="container"][class*="alert-pastel-"] {
+	background-color: rgb(255, 255, 238);
+	border-width: 0px;
+	border-left: 15px solid rgb(255, 240, 106);
+	border-radius: 0px;
+	box-shadow: 0px 0px 5px rgba(51, 51, 51, 0.3);
+	font-family: 'Old Standard TT', serif;
+	letter-spacing: 1px;
+}
+[data-notify="container"].alert-pastel-info {
+	border-left-color: rgb(255, 179, 40);
+}
+[data-notify="container"].alert-pastel-danger {
+	border-left-color: rgb(255, 103, 76);
+}
+[data-notify="container"][class*="alert-pastel-"] > [data-notify="title"] {
+	color: rgb(80, 80, 57);
+	display: block;
+	font-weight: 700;
+	margin-bottom: 5px;
+}
+[data-notify="container"][class*="alert-pastel-"] > [data-notify="message"] {
+	font-weight: 600;
+}
+
+[data-notify="progressbar"] {
+	margin-bottom: 0px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 5px;
+}
+
+.scrollable-div_contract-list {
+    overflow: auto;
+    margin-bottom: 5px;
+}
+
+.content-table-header{
+    margin: 0px 0px 0px 0px;
+    padding: 1px 0px 1px 0px;
+    color:#000;
+    font-weight:bold;
+}
+
+.content-table-border{
+    border: 1px dotted #ff9900;  
+    padding: 2px 2px 2px 2px; 
+    margin: 0px 0px 15px 0px; 
+}
+
+.subtotal {
+    height:3em;
+}   

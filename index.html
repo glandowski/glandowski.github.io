@@ -1,7 +1,1183 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>MacGyver UI Analysis Prototype</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/default.css" />
+
+<!-- start: Favicon and Touch Icons -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="ico/favicon.png">
+<!-- end: Favicon and Touch Icons -->
+
+</head>
+<body onload="obj_engine.initialize();">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid" style="background-color:#005395;">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><img src="images/MassDOT_Logo.svg.gif" style="height:22px;" /></a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			
+<!--
+			<form class="navbar-form navbar-left" style="padding:3px 0px 0px 0px;" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder=" Search">
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+
+			<div style="position:absolute;right:13em;top:.9em;">
+				<a href="#lightbox" onClick="obj_engine.loadModal('messages');">
+					<span class="badge">10</span>
+				</a>
+			</div>
+//-->
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Leeroy Jenkins<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#lightbox" onClick="obj_engine.loadModal('messages');">Messages <span class="badge">10</span></a></li>
+						<li><a href="#lightbox" onClick="obj_engine.loadModal('default');">Profile</a></li>
+						<li class="dropdown-submenu">
+							<a tabindex="-1" href="#">Preferences <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li class="dropdown-submenu">
+									<a href="#">Visual Themes <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="#lightbox" onClick="obj_engine.loadModal('default');">Light</a></li>
+										<li><a href="#lightbox" onClick="obj_engine.loadModal('default');">Dark</a></li>
+										<li><a href="#lightbox" onClick="obj_engine.loadModal('default');">Custom</a></li>
+									</ul>
+								</li>
+								<li><a tabindex="-1" href="#lightbox" onClick="obj_engine.loadModal('default');">Text Formating</a></li>
+								<li><a tabindex="-1" href="#lightbox" onClick="obj_engine.loadModal('default');">Header Formating</a></li>
+								<li><a tabindex="-1" href="#lightbox" onClick="obj_engine.loadModal('default');">Table Formating</a></li>
+							</ul>
+						</li>
+<!--
+						<li><a href="#lightbox" onClick="obj_engine.loadModal('messages');">Messages <span class="badge">10</span></a></li>
+						<li class="dropdown-submenu">
+							<a tabindex="-1" href="#">Dashboards <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a tabindex="-1" href="#">Contracts</a></li>
+								<li><a href="#">Projections</a></li>
+								<li class="dropdown-submenu">
+									<a href="#">Watching <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="#">3rd level</a></li>
+										<li><a href="#">3rd level</a></li>
+									</ul>
+								</li>
+								<li><a href="#">Add</a></li>
+							</ul>
+						</li>
+//-->
+						<li role="separator" class="divider"></li>
+						<li><a href="#lightbox" onClick="obj_engine.loadModal('default');">Reports</a></li>		
+						<li role="separator" class="divider"></li>
+						<li><a href="#lightbox" data-toggle="modal">Find...</a></li>
+						<li><a href="#lightbox" data-toggle="modal">Help</a></li>
+						<li><a href="#lightbox" data-toggle="modal">Log Out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="row">
+	<div style="height:50px;" />
+</div>
+
+
+<div class="row">
+	<div class="hidden-xs col-sm-2 col-md-1 vertical-menu">
+		<div class="btn-group-vertical pull-right" role="group" id="nav_main">
+			<button type="button" class="btn btn-dashboard-active" onclick="obj_engine.load_dashboard('Contracts',this);"><span class="glyphicon glyphicon-road" style="padding: 0px 5px 0px 0px;"></span> Contracts</button>
+
+			<button type="button" class="btn btn-dashboard" onclick="obj_engine.load_dashboard('Projections',this);"><span class="glyphicon glyphicon-signal" style="padding: 0px 5px 0px 0px;"></span> Projections</button>
+
+		</div>
+	</div>
+	<div id="stage_main" class="col-xs-12 col-sm-10 col-md-11">
+		<div class="widget_container">
+			<div class="row">
+				<div class="col-xs-10 widgetToolBar">
+                    <strong>CONTRACTS</strong>
+                </div>
+                <div class="col-xs-1 widgetToolBar right-text">
+                    <input type="text" class="form-control center-text" style="float:left;width:75px;height:1.5em; margin:4px 0px 0px 0px;" /><a class="btn glyphicon glyphicon-search" href="#" role="button" title="Find Contract" style="float:left;margin:3px 0px 0px 0px;"></a>
+                </div>
+                <div class="col-xs-1 widgetToolBar right-text">
+                    <a class="btn glyphicon glyphicon-filter" href="#" role="button" title="Filter Contracts" onclick="obj_engine.loadModal(&apos;filter&apos;)"></a>
+                    <a class="btn glyphicon glyphicon-option-vertical" href="#" role="button" title="Contracts Menu"></a>
+                </div>
+			</div>
+			<div class="row scrollable-div_contract-list">
+				<div class="rTable" id="stage_list_of_contracts">
+                    <div class="rTableRow widgetTable widgetTableHeader">
+                        <div class="rTableHead">Contract #</div>
+                        <div class="rTableHead">Location</div>
+                        <div class="rTableHead">Description</div>
+                        <div class="rTableHead">Contractor</div>
+                        <div class="rTableHead">Status</div>
+                        <div class="rTableHead">% Complete</div>
+                        <div class="rTableHead">Current Completion Date</div>
+                    </div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 widgetToolBar">
+                    <strong>Contract <span id="contract_detail_number"></span> – <span id="contract_detail_description">Roadway Reconstruction and Related Work (Including Traffic Signals)</span></strong>
+				</div>
+			</div>
+			<div class="row">
+				<div class="rTable">
+					<div class="rTableRow widgetTable">
+						<ul class="nav nav-tabs" id="contract_subtabs">
+							<li class="active"><a data-toggle="tab" href="#stage_contract_details" onClick="obj_engine.generate_contract_info();">OVERVIEW</a></li>
+                            <li><a data-toggle="tab" href="#stage_contract_details" onClick="obj_engine.generate_contract_contacts();">CONTACTS</a></li>
+                            <li><a data-toggle="tab" href="#stage_contract_details" onClick="obj_engine.generate_contract_items_table();">ITEMS</a></li>
+                            <li><a data-toggle="tab" href="#stage_contract_details" onClick="obj_engine.generate_contract_payslips_table();">PAY SLIPS</a></li>
+                            <li><a data-toggle="tab" href="#stage_contract_details"  onClick="obj_engine.generate_contract_estimates_table();">ESTIMATES</a></li>
+							<!-- <li><a data-toggle="tab" href="#stage_contract_details" onClick="obj_engine.generate_contract_projections_table();">PROJECTIONS</a></li> //-->
+						</ul>
+						<div class="tab-content">
+							<div id="stage_contract_details" class="tab-pane fade in active">
+								<!-- auto loaded by JSON engine //-->
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- CONTEXT MENUS START //-->
+
+<ul id="contextMenu_contract" class="dropdown-menu" role="menu">
+	<li><a tabindex="-1" href="#" onClick="obj_engine.click_on_contract_list_agreement('.row123456');">View Agreements</a></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Add Estimate</a></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('payment')">Add Payslip</a></li>
+    <li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Add Override</a></li>
+    <li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Add Underrun</a></li>
+    <li role="separator" class="divider"></li>
+	<li class="dropdown-submenu">
+		<a tabindex="-1" href="#">Reports <span class="caret"></span></a>
+		<ul class="dropdown-menu context-menu">
+			<li class="dropdown-submenu">
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 1</a>
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 2</a>
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 3</a>
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 4</a>
+			</li>
+		</ul>
+	</li>
+    <li role="separator" class="divider"></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Field Details</a></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Help</a></li>
+</ul>
+
+<ul id="contextMenu_agreement" class="dropdown-menu" role="menu">
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Add Estimate</a></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('payment')">Add Payslip</a></li>
+    <li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Add Override</a></li>
+    <li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Add Underrun</a></li>
+    <li role="separator" class="divider"></li>
+	<li class="dropdown-submenu">
+		<a tabindex="-1" href="#">Reports <span class="caret"></span></a>
+		<ul class="dropdown-menu context-menu">
+			<li class="dropdown-submenu">
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 1</a>
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 2</a>
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 3</a>
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 4</a>
+			</li>
+		</ul>
+	</li>
+    <li role="separator" class="divider"></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Field Details</a></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Help</a></li>
+</ul>
+
+<ul id="contextMenu_info" class="dropdown-menu" role="menu">
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Field Details</a></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Help</a></li>
+</ul>
+
+<ul id="contextMenu_item" class="dropdown-menu" role="menu">
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('item')">View</a></li>
+    <li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('item')">Edit</a></li>
+    <li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Delete</a></li>
+    <li role="separator" class="divider"></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('payment')">Add Payslip</a></li>
+    <li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('QCL')">View QCL</a></li>
+    <li class="dropdown-submenu">
+        <a tabindex="-1" href="#">Reports <span class="caret"></span></a>
+        <ul class="dropdown-menu context-menu">
+            <li class="dropdown-submenu">
+                <a href="#lightbox" onClick="obj_engine.loadModal('default');">QCL by Date</a>
+                <a href="#lightbox" onClick="obj_engine.loadModal('default');">QCL by Manifold</a>
+                <a href="#lightbox" onClick="obj_engine.loadModal('default');">QCL Index</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<ul id="contextMenu_estimate" class="dropdown-menu" role="menu">
+    <li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Add Estimate</a></li>
+    <li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Duplicate Estimate</a></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Remove Estimate</a></li>
+    <li role="separator" class="divider"></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('payment')">Add Payslip</a></li>
+    <li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Add Override</a></li>
+    <li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Add Underrun</a></li>
+    <li role="separator" class="divider"></li>
+	<li class="dropdown-submenu">
+		<a tabindex="-1" href="#">Reports <span class="caret"></span></a>
+		<ul class="dropdown-menu context-menu">
+			<li class="dropdown-submenu">
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 1</a>
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 2</a>
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 3</a>
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 4</a>
+			</li>
+		</ul>
+	</li>
+    <li role="separator" class="divider"></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Field Details</a></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Help</a></li>
+</ul>
+
+<ul id="contextMenu_payslip" class="dropdown-menu" role="menu">
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Duplicate Payslip</a></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Remove Payslip</a></li>
+    <li role="separator" class="divider"></li>
+	<li class="dropdown-submenu">
+		<a tabindex="-1" href="#">Reports <span class="caret"></span></a>
+		<ul class="dropdown-menu context-menu">
+			<li class="dropdown-submenu">
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 1</a>
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 2</a>
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 3</a>
+				<a href="#lightbox" onClick="obj_engine.loadModal('default');">Report 4</a>
+			</li>
+		</ul>
+	</li>
+    <li role="separator" class="divider"></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Field Details</a></li>
+	<li><a tabindex="-1" href="#" onClick="obj_engine.loadModal('default')">Help</a></li>
+</ul>
+<!-- CONTEXT MENUS END //-->
+
+
+<!-- MODAL WINDOWS START //-->
+<div class="modal fade" id="lightbox" role="dialog">
+	<div class="modal-dialog  modal-lg">
+
+		<div class="modal-content">
+
+			<div class="model-header widgetToolBar">
+				<strong id="stage_modal_title">POP-UP TITLE</strong>
+				<div class="pull-right">
+					<a class="btn glyphicon glyphicon-remove" href="#lightbox" role="button" data-toggle="modal"></a>
+				</div>
+			</div>
+
+            <div class="modal-buttons">
+                <div class="pull-left" id="stage_modal_dynamic">
+                    
+                </div>
+                <div class="pull-right"  id="stage_modal_buttons">
+                    <button type="button" class="btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+			<div class="modal-body" id="stage_modal_body">
+				Words
+			</div>
+
+		</div>
+
+	</div>
+</div>
+<!-- MODAL WINDOWS END //-->
+
+
+<!-- DETAIL TABS START //-->
+    <div id="detail_tab_info" class="hidden">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12 col-lg-6 box-border">
+                    <div class="col-xs-12 content-table-header">Contract Information</div>
+                    <div class="col-xs-12 content-table-border">
+                        <div class="col-xs-12 col-md-2 widgetTableLabel">Contract #: </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">######</div>
+                        <div class="col-xs-12 col-md-2 widgetTableLabel">Description: </div>
+                        <div class="col-xs-12 col-md-6 widgetTableData">Description goes here.</div>
+                        <div class="col-xs-12 col-md-2 widgetTableLabel">Project #: </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">#####</div>
+                        <div class="col-xs-12 col-md-2 widgetTableLabel">Location: </div>
+                        <div class="col-xs-12 col-md-6 widgetTableData">[location]</div>
+                        <div class="col-xs-12 col-md-2 widgetTableLabel">District Job #: </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">#####</div>
+                        <div class="col-xs-12 col-md-2 widgetTableLabel">Route/Street: </div>
+                        <div class="col-xs-12 col-md-6 widgetTableData">[route/street]</div>
+                        
+                        <div class="col-xs-12 col-md-2 widgetTableLabel">District </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">[district]</div>
+                        <div class="col-xs-12 col-md-2 widgetTableLabel">Bridge # </div>
+                        <div class="col-xs-12 col-md-6 widgetTableData">####</div>
+
+                        <div class="col-xs-12 col-md-2 widgetTableLabel">FA #: </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">#####</div>
+                        <div class="col-xs-12 col-md-2 widgetTableLabel">Measuring Sys.: </div>
+                        <div class="col-xs-12 col-md-6 widgetTableData">[value]</div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 box-border">
+                    <div class="col-xs-12 content-table-header">Significant Dates</div>
+                    <div class="col-xs-12 content-table-border">
+                        <div class="col-xs-12 col-md-4 widgetTableLabel">Notice To Proceed: </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">MM/DD/YYYY</div>
+                        <div class="col-xs-12 col-md-4 widgetTableLabel">Current Completion Date: </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">MM/DD/YYYY</div>
+                        <div class="col-xs-12 col-md-4 widgetTableLabel">Start Date: </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">MM/DD/YYYY</div>
+                        <div class="col-xs-12 col-md-4 widgetTableLabel">Requested Completion Date: </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">MM/DD/YYYY</div>
+                        <div class="col-xs-12 col-md-4 widgetTableLabel">Original Completion Date: </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">MM/DD/YYYY</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-xs-12 box-border">
+                    <div class="col-xs-12 content-table-header">Funding Source(s)</div>
+                    <div class="col-xs-12 content-table-border">
+                        <div class="rTable">
+                            <div class="rTableRow widgetTable widgetTableHeader">
+                                <div class="rTableHead" style="width:175px;">Contract Type</div>
+                                <div class="rTableHead center-text" style="width:175px;">Contract #</div>
+                                <div class="rTableHead center-text" style="width:175px;">PC#</div>
+                                <div class="rTableHead" style="width:175px;">Breakout/PC Title</div>
+                                <div class="rTableHead right-text" style="width:175px;">MMARS Encumbrance</div>
+                                <div class="rTableHead right-text" style="width:175px;">MMARS Encumbrance Remaining</div>
+                                <div class="rTableHead right-text" style="width:175px;">Current Fiscal Yr Total</div>
+                                <div class="rTableHead right-text" style="width:175px;">Current Fiscal Yr Remaining</div>
+                                <div class="rTableHead">&nbsp;</div>
+                            </div>
+                            <div class="rTableRow widgetTable cssTableRow">
+                                <div class="rTableCellOdd">MHD</div>
+                                <div class="rTableCellOdd center-text">77717</div>
+                                <div class="rTableCellOdd center-text">1</div>
+                                <div class="rTableCellOdd">CM-002S(410)</div>
+                                <div class="rTableCellOdd right-text">$5,726,264.41</div>
+                                <div class="rTableCellOdd right-text">$1,431,566.10</div>
+                                <div class="rTableCellOdd right-text">$5,726,264.41</div>
+                                <div class="rTableCellOdd right-text">$1,431,566.10</div>
+                                <div class="rTableCellOdd">&nbsp;</div>
+                            </div>
+                            <div class="rTableRow widgetTable cssTableRow">
+                                <div class="rTableCell">MHD</div>
+                                <div class="rTableCell center-text">77717</div>
+                                <div class="rTableCell center-text">2</div>
+                                <div class="rTableCell">STP-002S(410)</div>
+                                <div class="rTableCell right-text">$5,726,264.41</div>
+                                <div class="rTableCell right-text">$1,431,566.10</div>
+                                <div class="rTableCell right-text">$5,726,264.41</div>
+                                <div class="rTableCell right-text">$1,431,566.10</div>
+                                <div class="rTableCell">&nbsp;</div>
+                            </div>
+                            <div class="rTableRow widgetTable cssTableRow">
+                                <div class="rTableCellOdd">MHD</div>
+                                <div class="rTableCellOdd center-text">77717</div>
+                                <div class="rTableCellOdd center-text">3</div>
+                                <div class="rTableCellOdd">100% STATE</div>
+                                <div class="rTableCellOdd right-text">$5,726,264.41</div>
+                                <div class="rTableCellOdd right-text">$1,431,566.10</div>
+                                <div class="rTableCellOdd right-text">$5,726,264.41</div>
+                                <div class="rTableCellOdd right-text">$1,431,566.10</div>
+                                <div class="rTableCellOdd">&nbsp;</div>
+                            </div>
+                            <div class="rTableRow widgetTable">
+                                <div class="rTableCell"></div>
+                                <div class="rTableCell center-text"></div>
+                                <div class="rTableCell center-text"></div>
+                                <div class="rTableCell widgetTableLabel text-right subtotal">Subtotal:</div>
+                                <div class="rTableCell right-text"><strong>$17,178,793.23</strong></div>
+                                <div class="rTableCell right-text"><strong>$4,294,698.30</strong></div>
+                                <div class="rTableCell right-text"><strong>$17,178,793.23</strong></div>
+                                <div class="rTableCell right-text"><strong>$4,294,698.30</strong></div>
+                                <div class="rTableCell">&nbsp;</div>
+                            </div>
+                            <div class="rTableRow widgetTable cssTableRow">
+                                <div class="rTableCell">Agreement Estimate</div>
+                                <div class="rTableCell center-text">77685</div>
+                                <div class="rTableCell center-text">1</div>
+                                <div class="rTableCell">AGMT #77685</div>
+                                <div class="rTableCell right-text">$79,758.63</div>
+                                <div class="rTableCell right-text">$19,939.65</div>
+                                <div class="rTableCell right-text">N/A</div>
+                                <div class="rTableCell right-text">N/A</div>
+                                <div class="rTableCell">&nbsp;</div>
+                            </div>
+                            <div class="rTableRow widgetTable">
+                                <div class="rTableCell"></div>
+                                <div class="rTableCell center-text"></div>
+                                <div class="rTableCell center-text"></div>
+                                <div class="rTableCell widgetTableLabel text-right subtotal">Subtotal:</div>
+                                <div class="rTableCell right-text"><strong>$79,758.63</strong></div>
+                                <div class="rTableCell right-text"><strong>$19,939.65</strong></div>
+                                <div class="rTableCell right-text"><strong></strong></div>
+                                <div class="rTableCell right-text"><strong></strong></div>
+                                <div class="rTableCell">&nbsp;</div>
+                            </div>
+                            <div class="rTableRow widgetTable cssTableRow">
+                                <div class="rTableCellOdd">Agreement Estimate</div>
+                                <div class="rTableCellOdd center-text">76366</div>
+                                <div class="rTableCellOdd center-text">1</div>
+                                <div class="rTableCellOdd">10% AGMT #76366</div>
+                                <div class="rTableCellOdd right-text">$0.00</div>
+                                <div class="rTableCellOdd right-text">$0.00</div>
+                                <div class="rTableCellOdd right-text">N/A</div>
+                                <div class="rTableCellOdd right-text">N/A</div>
+                                <div class="rTableCellOdd">&nbsp;</div>
+                            </div>
+                            <div class="rTableRow widgetTable">
+                                <div class="rTableCell"></div>
+                                <div class="rTableCell center-text"></div>
+                                <div class="rTableCell center-text"></div>
+                                <div class="rTableCell widgetTableLabel text-right subtotal">Subtotal:</div>
+                                <div class="rTableCell right-text"><strong>$0.00</strong></div>
+                                <div class="rTableCell right-text"><strong>$0.00</strong></div>
+                                <div class="rTableCell right-text"><strong></strong></div>
+                                <div class="rTableCell right-text"><strong></strong></div>
+                                <div class="rTableCell">&nbsp;</div>
+                            </div>
+                            <div class="rTableRow widgetTable">
+                                <div class="rTableCell"></div>
+                                <div class="rTableCell center-text"></div>
+                                <div class="rTableCell center-text"></div>
+                                <div class="rTableCell widgetTableLabel text-right subtotal"><strong>TOTAL:</strong></div>
+                                <div class="rTableCell right-text"><strong>$17,258,551.87</strong></div>
+                                <div class="rTableCell right-text"><strong>$4,314,637.97</strong></div>
+                                <div class="rTableCell right-text"><strong></strong></div>
+                                <div class="rTableCell right-text"><strong></strong></div>
+                                <div class="rTableCell">&nbsp;</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="detail_tab_contacts" class="hidden">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12 col-lg-6 box-border">
+                    <div class="col-xs-12 content-table-header">Contractor Information</div>
+                    <div class="col-xs-12 content-table-border">
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Contractor: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">Contractor LLC</div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Superintendent: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">First Last</div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Contact Person: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">First Last</div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Contractor Phone: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">(###) ###-####</div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Contractor Email 1: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">first.last@domain.com</div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Contractor Email 2: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">first2.last2@domain.com</div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Corporate Address: </div>
+                        <div class="col-xs-12 col-md-9 widgetTableData">123 Corporate Drive, Boston, MA 02133</div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Project Address:</div>
+                        <div class="col-xs-12 col-md-9 widgetTableData">456 Shovel St, Waltham, MA 02453</div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Emergency Contact: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">First Lastname</div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Emergency Phone: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">(###) ###-####</div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Emergency Contact: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">First Lastname <a class="btn glyphicon glyphicon-search" href="#" role="button" onclick="obj_engine.loadModal(&apos;default&apos;)" title="Click to view all Emergency Contact Names"></a></div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Emergency Phone: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">(###) ###-#### <a class="btn glyphicon glyphicon-search" href="#" role="button" onclick="obj_engine.loadModal(&apos;default&apos;)" title="Click to view all Emergency Contact Numbers"></a></div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Emergency Contact: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData"><a onclick="obj_engine.loadModal(&apos;default&apos;)">Click to view all</a></div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Emergency Phone: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData"><a onclick="obj_engine.loadModal(&apos;default&apos;)">Click to view all</a></div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Emergency Contact:</div>
+                        <div class="col-xs-12 col-md-9 widgetTableData">First Lastname - Cell (###) ###-#### - Alt (###) ###-####  <a onclick="obj_engine.loadModal(&apos;default&apos;)">view more</a></div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 box-border">
+                    <div class="col-xs-12 content-table-header">Construction Field Office Information</div>
+                    <div class="col-xs-12 content-table-border">
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Resident Engineer: </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">First Last</div>
+                        <div class="col-xs-12 col-md-2 widgetTableLabel">Address: </div>
+                        <div class="col-xs-12 col-md-5 widgetTableData">[address]</div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Phone: </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">(###) ###-####</div>
+                        <div class="col-xs-12 col-md-2 widgetTableLabel">Fax: </div>
+                        <div class="col-xs-12 col-md-5 widgetTableData">(###) ###-####</div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">City: </div>
+                        <div class="col-xs-12 col-md-2 widgetTableData">Chelmsford</div>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+
+<div id="detail_tab_projections" class="hidden">
+    <div class="row">
+<div class="col-md-12 col-lg-6">
+    <table class="table widgetTable" style="cursor: pointer; cursor: hand;">
+        <thead>
+            <tr class="widgetTableHeader"><td>2016</td>	<td class="center-text">All</td>					<td class="center-text">Federal</td>															<td class="center-text">State</td>															<td class="center-text">Municipal</td>	</tr>
+        </thead>
+        <tbody>
+            <tr><td class="right-text bold-text">TOTAL</td><td class="right-text  bold-text" id="field_2016E">$0.00</td>	<td class="right-text" id="field_2016EF">$0.00</td>												<td class="right-text" id="field_2016ES">$0.00</td>											<td class="right-text" id="field_2016EM">$0.00</td></tr>
+            <tr class="right-text"><td>January</td>		<td class="right-text" id="field_201601">$0.00</td>	<td><input type="text" id="field_201601F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201601S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201601M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+            <tr class="right-text"><td>February</td>	<td class="right-text" id="field_201602">$0.00</td>	<td><input type="text" id="field_201602F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201602S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201602M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+            <tr class="right-text"><td>March</td>		<td class="right-text" id="field_201603">$0.00</td>	<td><input type="text" id="field_201603F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201603S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201603M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+            <tr class="right-text"><td>April</td>		<td class="right-text" id="field_201604">$0.00</td>	<td><input type="text" id="field_201604F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201604S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201604M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+            <tr class="right-text"><td>May</td>			<td class="right-text" id="field_201605">$0.00</td>	<td><input type="text" id="field_201605F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201605S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201605M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+            <tr class="right-text"><td>June</td>		<td class="right-text" id="field_201606">$0.00</td>	<td><input type="text" id="field_201606F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201606S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201606M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+            <tr class="right-text"><td>July</td>		<td class="right-text" id="field_201607">$0.00</td>	<td><input type="text" id="field_201607F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201607S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201607M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+            <tr class="right-text"><td>August</td>		<td class="right-text" id="field_201608">$0.00</td>	<td><input type="text" id="field_201608F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201608S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201608M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+            <tr class="right-text"><td>September</td>	<td class="right-text" id="field_201609">$0.00</td>	<td><input type="text" id="field_201609F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201609S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201609M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+            <tr class="right-text"><td>October</td>		<td class="right-text" id="field_201610">$0.00</td>	<td><input type="text" id="field_201610F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201610S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201610M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+            <tr class="right-text"><td>November</td>	<td class="right-text" id="field_201611">$0.00</td>	<td><input type="text" id="field_201611F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201611S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201611M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+            <tr class="right-text"><td>December</td>	<td class="right-text" id="field_201612">$0.00</td>	<td><input type="text" id="field_201612F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201612S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201612M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-md-12 col-lg-6">
+
+</div>
+</div>
+</div>
+<!-- DETAIL TABS END //-->
+<!-- DASHBOARDS CONTENT START //-->
+<div id="hidden_dashboard_contracts" class="hidden">
+SHOW CONTRACTS DASHBOARD
+</div>
+
+
+    <div id="hidden_dashboard_projections" class="hidden">
+        <div class="widget_container">
+            <div class="row">
+                <div class="col-xs-12 widgetToolBar">
+                    <strong>PROJECTIONS</strong>
+                    <div class="pull-right">
+                        <a class="btn glyphicon glyphicon-option-vertical" href="#lightbox" role="button" data-toggle="modal"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row tab-pane">
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+
+                        <table class="table widgetTable" style="cursor: pointer; cursor: hand;">
+                            <thead>
+                                <tr class="widgetTableHeader"><td>2016</td>	<td class="center-text">All</td>					<td class="center-text">Federal</td>															<td class="center-text">State</td>															<td class="center-text">Municipal</td>	</tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="right-text bold-text">TOTAL</td><td class="right-text  bold-text" id="field_2016E">$0.00</td>	<td class="right-text" id="field_2016EF">$0.00</td>												<td class="right-text" id="field_2016ES">$0.00</td>											<td class="right-text" id="field_2016EM">$0.00</td></tr>
+                                <tr class="right-text"><td>January</td>		<td class="right-text" id="field_201601">$0.00</td>	<td><input type="text" id="field_201601F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201601S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201601M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+                                <tr class="right-text"><td>February</td>	<td class="right-text" id="field_201602">$0.00</td>	<td><input type="text" id="field_201602F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201602S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201602M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+                                <tr class="right-text"><td>March</td>		<td class="right-text" id="field_201603">$0.00</td>	<td><input type="text" id="field_201603F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201603S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201603M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+                                <tr class="right-text"><td>April</td>		<td class="right-text" id="field_201604">$0.00</td>	<td><input type="text" id="field_201604F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201604S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201604M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+                                <tr class="right-text"><td>May</td>			<td class="right-text" id="field_201605">$0.00</td>	<td><input type="text" id="field_201605F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201605S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201605M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+                                <tr class="right-text"><td>June</td>		<td class="right-text" id="field_201606">$0.00</td>	<td><input type="text" id="field_201606F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201606S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201606M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+                                <tr class="right-text"><td>July</td>		<td class="right-text" id="field_201607">$0.00</td>	<td><input type="text" id="field_201607F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201607S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201607M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+                                <tr class="right-text"><td>August</td>		<td class="right-text" id="field_201608">$0.00</td>	<td><input type="text" id="field_201608F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201608S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201608M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+                                <tr class="right-text"><td>September</td>	<td class="right-text" id="field_201609">$0.00</td>	<td><input type="text" id="field_201609F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201609S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201609M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+                                <tr class="right-text"><td>October</td>		<td class="right-text" id="field_201610">$0.00</td>	<td><input type="text" id="field_201610F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201610S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201610M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+                                <tr class="right-text"><td>November</td>	<td class="right-text" id="field_201611">$0.00</td>	<td><input type="text" id="field_201611F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201611S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201611M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+                                <tr class="right-text"><td>December</td>	<td class="right-text" id="field_201612">$0.00</td>	<td><input type="text" id="field_201612F" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>		<td><input type="text" id="field_201612S" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	<td><input type="text" id="field_201612M" class="form-control right-text" onclick="$(this).select();" onchange="obj_engine.update_projections_data_object(this);" value="" /></td>	</tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="col-md-12 col-lg-6">
+                        <div id="chart_yearlyProjections" style="min-width: 310px; max-width: 800px; height: 500px; margin: 0 auto; padding-top:60px;" hidden></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="hidden_dashboard_add" class="hidden">
+            SHOW ADD DASHBOARD
+        </div>
+        <!-- DASHBOARDS CONTENT END //-->
+        <!-- MODAL LAYOUTS START//-->
+        <div id="hidden_model_filter" class="hidden">
+            <div class="row">
+                <div class="form-group col-xs-6 col-md-4 col-lg-3">
+                    <select class="form-control widget-form-control">
+                        <option>[field name]</option>
+                        <option>Item #</option>
+                        <option>Item Description</option>
+                        <option>Unit</option>
+                        <option>Unit Price</option>
+                        <option>Prelim. Qty Qty</option>
+                        <option>Pending Qty</option>
+                        <option>Accepted Qty</option>
+                        <option>Payment to Date</option>
+                        <option>Balance Qty</option>
+                        <option>Current Projected Quantity</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-6 col-md-4 col-lg-3">
+                    <select class="form-control widget-form-control">
+                        <option>[condition]</option>
+                        <option>contains</option>
+                        <option>does not contain</option>
+                        <option>equals</option>
+                        <option>is not equal to</option>
+                        <option>is less than</option>
+                        <option>is greater than</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-6 col-md-4 col-lg-3">
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-6 col-md-4 col-lg-3">
+                    <select class="form-control widget-form-control">
+                        <option>[field name]</option>
+                        <option>Item #</option>
+                        <option>Item Description</option>
+                        <option>Unit</option>
+                        <option>Unit Price</option>
+                        <option>Bid Qty</option>
+                        <option>Original Qty</option>
+                        <option>Pending Qty</option>
+                        <option>Accepted Qty</option>
+                        <option>Payment to Date</option>
+                        <option>% Used</option>
+                        <option>Balance Qty</option>
+                        <option>Current Projected Quantity</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-6 col-md-4 col-lg-3">
+                    <select class="form-control widget-form-control">
+                        <option>[condition]</option>
+                        <option>contains</option>
+                        <option>does not contain</option>
+                        <option>equals</option>
+                        <option>is not equal to</option>
+                        <option>is less than</option>
+                        <option>is greater than</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-6 col-md-4 col-lg-3">
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+<div id="hidden_model_payment" class="hidden">
+    <form action="" class="form widgetTable">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12 col-lg-6 box-border">
+                    <div class="col-xs-12 content-table-border">
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Funding Source: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <select class="form-control widget-form-control" onChange="">
+                                <option value="" selected> - SELECT - </option>
+                                <option value="">77717 – 1 - CM-002S(410)</option>
+                                <option value="">77717 – 2 -STP-002S(410)</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Contract Type</div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="" />
+                        </div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Contract #</div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="" />
+                        </div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Breakout/PC Title</div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="" />
+                        </div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Item #</div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="" />
+                        </div>
+                        
+                        <div class="col-xs-hidden col-sm-6 widgetTableLabel" style="height:30px;width:300px;">&nbsp;</div>
+
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Item Description</div>
+                        <div class="col-xs-12 col-md-9 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 box-border">
+                    <div class="col-xs-12 content-table-border">
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Date: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="MM/DD/YYYY" />
+                        </div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Initials: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="XYZ" />
+                        </div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Manifold Book: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <select class="form-control widget-form-control" onChange="">
+                                <option value="" selected> - SELECT - </option>
+                                <option value="">77717-01</option>
+                                <option value="">77717-02</option>
+                                <option value="">77717-03</option>
+                                <option value="">77717-04</option>
+                                <option value="">77717-05</option>
+                                <option value="">77717-06</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Bridge #: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <select class="form-control widget-form-control" onChange="">
+                                <option value="" selected> - SELECT - </option>
+                            </select>
+                        </div>
+                        <div class="clearfix visible-sm-block"></div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Calculation Method: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <select class="form-control widget-form-control" onChange="">
+                                <option value="" selected> - SELECT - </option>
+                                <option value="">Field Measurements</option>
+                                <option value="">Plan Data</option>
+                                <option value="">Invoice/Ticket</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">RE Last Payslip: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <select class="form-control widget-form-control" onChange="">
+                                <option value="" selected>No</option>
+                                <option value="">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group col-xs-12 col-md-12 col-lg-6">
+                    <label for="field_1">Description/Location/ (GIS)</label>
+                    <textarea class="form-control custom-control" rows="2"></textarea>
+                </div>
+                <div class="form-group col-xs-12 col-md-12 col-lg-6">
+                    <label for="field_1">Remarks <span class="optional">(optional)</span></label>
+                    <textarea class="form-control custom-control" rows="2"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="col-md-12 col-lg-6 box-border">
+                    <div class="col-xs-12 content-table-border">
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Preliminary Qty: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="###" />
+                        </div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Current Projected Qty: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="###" />
+                        </div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Qty This Estimate: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="###" />
+                        </div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Total Item Qty To Date: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="###" />
+                        </div>
+                        <div class="clearfix visible-sm-block"></div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Final Qty: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="###" />
+                        </div>
+                        <div class="col-xs-12 col-md-3 widgetTableLabel">Total Final Qty To Date: </div>
+                        <div class="col-xs-12 col-md-3 widgetTableData">
+                            <input type="text" id="field_1" class="form-control" value="###" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 box-border">
+                    <div class="col-xs-12 content-table-border">
+                        <div class="form-group col-xs-12">
+                            <label for="field_1">Attachments</label>
+                            <br />
+                            <label class="btn btn-default btn-file">
+                                Browse <input type="file" style="display: none;">
+                            </label>
+                            <span style="width:20px;">&nbsp;</span>
+                            <span class="badge badge_blue"> sample_document.pdf &nbsp;&nbsp;x </span>
+                            <span class="badge badge_blue"> another_document.pdf &nbsp;&nbsp;x </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="hidden_model_item" class="hidden">
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group col-xs-6 col-md-4 col-lg-3">
+            <label for="field_1">Item #</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-8 col-lg-9">
+            <label for="field_1">Item Description</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-4">
+            <label for="field_1">Funding Source</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-4">
+            <label for="field_1">Unit</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-4">
+            <label for="field_1">Unit Price</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-4">
+            <label for="field_1">Prelim Qty</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-4">
+            <label for="field_1">Qty Paid to Date</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-4">
+            <label for="field_1">Current Projected Qty</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+    </div>
+    <!--
+    <div class="col-md-12 col-lg-7">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="widgetTableLabel">&nbsp;</th>
+                    <th class="widgetTableLabel center-text">Qty Projected</th>
+                    <th class="widgetTableLabel center-text">Qty Applied</th>
+                    <th class="widgetTableLabel center-text">Qty Balance</th>
+                    <th class="widgetTableLabel center-text">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="">
+                    <td class="rTableCell">TOTALS</td>
+                    <td class="rTableCell center-text"><strong>105</strong></td>
+                    <td class="rTableCell center-text"><strong>80</strong></td>
+                    <td class="rTableCell center-text"><strong>25</strong></td>
+                    <td class="rTableCell"><strong>$20,000.00</strong></td>
+                </tr>
+
+                <tr class="contextMenu_payslip">
+                    <td class="rTableCellOdd" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">Pay Slip 123456-13-1</td>
+                    <td class="rTableCellOdd center-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);"></td>
+                    <td class="rTableCellOdd center-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">25</td>
+                    <td class="rTableCellOdd center-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);"></td>
+                    <td class="rTableCellOdd right-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">($25,000.00)</td>
+                </tr>
+                <tr class="contextMenu_payslip">
+                    <td class="rTableCell" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">Pay Slip 123456-12-6</td>
+                    <td class="rTableCell center-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);"></td>
+                    <td class="rTableCell center-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">30</td>
+                    <td class="rTableCell center-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);"></td>
+                    <td class="rTableCell right-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">($30,000.00)</td>
+                </tr>
+                <tr class="contextMenu_payslip">
+                    <td class="rTableCellOdd">Override 123456-20</td>
+                    <td class="rTableCellOdd center-text">95</td>
+                    <td class="rTableCellOdd center-text"></td>
+                    <td class="rTableCellOdd center-text"></td>
+                    <td class="rTableCellOdd">$95,000.00</td>
+                </tr>
+                <tr class="contextMenu_payslip">
+                    <td class="rTableCell" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">Pay Slip 123456-1-12</td>
+                    <td class="rTableCell center-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);"></td>
+                    <td class="rTableCell center-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">5</td>
+                    <td class="rTableCell center-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);"></td>
+                    <td class="rTableCell right-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">($5,000.00)</td>
+                </tr>
+                <tr class="contextMenu_payslip">
+                    <td class="rTableCellOdd" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">Pay Slip 123456-14-5</td>
+                    <td class="rTableCellOdd center-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);"></td>
+                    <td class="rTableCellOdd center-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">25</td>
+                    <td class="rTableCellOdd center-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);"></td>
+                    <td class="rTableCellOdd right-text" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">($25,000.00)</td>
+                </tr>
+                <tr>
+                    <td class="rTableCell">Starting Quantity</td>
+                    <td class="rTableCell center-text">10</td>
+                    <td class="rTableCell center-text"></td>
+                    <td class="rTableCell center-text"></td>
+                    <td class="rTableCell">$10,000.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    //-->
+    <div class="col-lg-1">
+    </div>
+</div>
+
+<div id="hidden_model_item_add" class="hidden">
+    <div class="row">
+    <div class="col-md-12">
+        <div class="form-group col-xs-6 col-md-4 col-lg-3">
+            <label for="field_1">Item #</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-8 col-lg-9">
+            <label for="field_1">Item Description</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-4">
+            <label for="field_1">Funding Source</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-4">
+            <label for="field_1">Unit</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-4">
+            <label for="field_1">Unit Price</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-4">
+            <label for="field_1">Prelim Qty</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-4">
+            <label for="field_1">Qty Paid to Date</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+        <div class="form-group col-xs-6 col-md-4">
+            <label for="field_1">Current Projected Qty</label>
+            <input type="text" id="" class="form-control" />
+        </div>
+    </div>
+    <!--
+    <div class="col-md-12 col-lg-7">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="widgetTableLabel">&nbsp;</th>
+                    <th class="widgetTableLabel center-text">Qty Projected</th>
+                    <th class="widgetTableLabel center-text">Qty Applied</th>
+                    <th class="widgetTableLabel center-text">Qty Balance</th>
+                    <th class="widgetTableLabel center-text">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="">
+                    <td class="rTableCell">TOTALS</td>
+                    <td class="rTableCell center-text"><strong>0</strong></td>
+                    <td class="rTableCell center-text"><strong>0</strong></td>
+                    <td class="rTableCell center-text"><strong>0</strong></td>
+                    <td class="rTableCell"><strong>$0.00</strong></td>
+                </tr>
+                <tr>
+                    <td class="rTableCell">Starting Quantity</td>
+                    <td class="rTableCell center-text">0</td>
+                    <td class="rTableCell center-text"></td>
+                    <td class="rTableCell center-text"></td>
+                    <td class="rTableCell">$0.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    //-->
+    <div class="col-lg-1">
+    </div>
+</div>
+
+<div id="hidden_model_item_qcl" class="hidden">
+    <div class="rTable">
+        <div class="rTableRow widgetTable widgetTableHeader">
+            <div class="rTableHead">Funding Source</div>
+            <div class="rTableHead center-text">Estimate #</div>
+            <div class="rTableHead center-text">Qty this Estimate</div>
+            <div class="rTableHead center-text">Final Qty</div>
+            <div class="rTableHead center-text">Payslip Date</div>
+            <div class="rTableHead center-text">Engineer</div>
+            <div class="rTableHead center-text">Manifold Book</div>
+            <div class="rTableHead">Location Description</div>
+            <div class="rTableHead center-text">Remarks</div>
+            <div class="rTableHead center-text">&nbsp;</div>
+        </div>
+        <div class="rTableRow widgetTable cssTableRow contextMenu_payslip" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">
+            <div class="rTableCellOdd">88710 - 2</div>
+            <div class="rTableCellOdd center-text">1</div>
+            <div class="rTableCellOdd center-text">2</div>
+            <div class="rTableCellOdd center-text">2</div>
+            <div class="rTableCellOdd center-text">03/22/16</div>
+            <div class="rTableCellOdd center-text">GFL</div>
+            <div class="rTableCellOdd center-text">88710 - 1</div>
+            <div class="rTableCellOdd">Elm St. Rt.3. Braintree=1 Misc=1 total=2</div>
+            <div class="rTableCellOdd center-text">Remarks</div>
+            <div class="rTableCellOdd center-text">&nbsp;</div>
+        </div>
+        <div class="rTableRow widgetTable cssTableRow contextMenu_payslip" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">
+            <div class="rTableCell">88710 - 2</div>
+            <div class="rTableCell center-text">2</div>
+            <div class="rTableCell center-text">13</div>
+            <div class="rTableCell center-text">13</div>
+            <div class="rTableCell center-text">04/05/16</div>
+            <div class="rTableCell center-text">GFL</div>
+            <div class="rTableCell center-text">88710 - 2</div>
+            <div class="rTableCell">Elm St. overpass, Rt.3, Braintree=13</div>
+            <div class="rTableCell center-text">Remarks</div>
+            <div class="rTableCell center-text">&nbsp;</div>
+        </div>
+        <div class="rTableRow widgetTable cssTableRow contextMenu_payslip" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">
+            <div class="rTableCellOdd">88710 - 2</div>
+            <div class="rTableCellOdd center-text">3</div>
+            <div class="rTableCellOdd center-text">12</div>
+            <div class="rTableCellOdd center-text">12</div>
+            <div class="rTableCellOdd center-text">05/04/16</div>
+            <div class="rTableCellOdd center-text">GFL</div>
+            <div class="rTableCellOdd center-text">88710 - 3</div>
+            <div class="rTableCellOdd">Elm St., Rt.3, Braintree=10 Memorial Dr.,Cambridge=2 total=12</div>
+            <div class="rTableCellOdd center-text">Remarks</div>
+            <div class="rTableCellOdd center-text">&nbsp;</div>
+        </div>
+        <div class="rTableRow widgetTable cssTableRow contextMenu_payslip" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">
+            <div class="rTableCell">88710 - 3</div>
+            <div class="rTableCell center-text">3</div>
+            <div class="rTableCell center-text">1</div>
+            <div class="rTableCell center-text">1</div>
+            <div class="rTableCell center-text">05/04/16</div>
+            <div class="rTableCell center-text">GFL</div>
+            <div class="rTableCell center-text">88710 - 4</div>
+            <div class="rTableCell">Beacon St., I-90, Boston=1</div>
+            <div class="rTableCell center-text">Remarks</div>
+            <div class="rTableCell center-text">&nbsp;</div>
+        </div>
+        <div class="rTableRow widgetTable cssTableRow contextMenu_payslip" ondblclick="obj_engine.loadModal(&apos;payment&apos;);">
+            <div class="rTableCellOdd">88710 - 3</div>
+            <div class="rTableCellOdd center-text">4</div>
+            <div class="rTableCellOdd center-text">2</div>
+            <div class="rTableCellOdd center-text">2</div>
+            <div class="rTableCellOdd center-text">05/22/16</div>
+            <div class="rTableCellOdd center-text">GFL</div>
+            <div class="rTableCellOdd center-text">88710 - 5</div>
+            <div class="rTableCellOdd">Beacon St., I-90, Boston=2</div>
+            <div class="rTableCellOdd center-text">Remarks</div>
+            <div class="rTableCellOdd center-text">&nbsp;</div>
+        </div>
+    </div>
+    <div>&nbsp;</div>
+    <div class="rTable">
+        <div class="rTableRow widgetTable widgetTableHeader">
+            <div class="rTableHead">Funding Source</div>
+            <div class="rTableHead center-text">Prelim Qty</div>
+            <div class="rTableHead center-text">Current Projected Qty</div>
+            <div class="rTableHead center-text">Payslip Quantity to Date</div>
+            <div class="rTableHead center-text">% Prelim Qty to Date</div>
+            <div class="rTableHead center-text">Final Qty to Date</div>
+            <div class="rTableHead center-text">% Final to Date</div>
+            <div class="rTableHead center-text">&nbsp;</div>
+        </div>
+        <div class="rTableRow widgetTable cssTableRow">
+            <div class="rTableCellOdd">88710 - 1 - NFA/TOBOE : 100% STATE</div>
+            <div class="rTableCellOdd center-text">20</div>
+            <div class="rTableCellOdd center-text">20</div>
+            <div class="rTableCellOdd center-text">0</div>
+            <div class="rTableCellOdd center-text">0</div>
+            <div class="rTableCellOdd center-text">0</div>
+            <div class="rTableCellOdd center-text">0</div>
+            <div class="rTableCellOdd center-text">&nbsp;</div>
+        </div>
+        <div class="rTableRow widgetTable cssTableRow">
+            <div class="rTableCell">88710 - 2 - NFA/OE : 100% STATE</div>
+            <div class="rTableCell center-text">350</div>
+            <div class="rTableCell center-text">350</div>
+            <div class="rTableCell center-text">27</div>
+            <div class="rTableCell center-text">3.75%</div>
+            <div class="rTableCell center-text">27</div>
+            <div class="rTableCell center-text">3.75%</div>
+            <div class="rTableCell center-text">&nbsp;</div>
+        </div>
+        <div class="rTableRow widgetTable cssTableRow">
+            <div class="rTableCellOdd">88710 - 3 - NFA/MHSOE : 100% STATE</div>
+            <div class="rTableCellOdd center-text">350</div>
+            <div class="rTableCellOdd center-text">350</div>
+            <div class="rTableCellOdd center-text">3</div>
+            <div class="rTableCellOdd center-text">0.42%</div>
+            <div class="rTableCellOdd center-text">3</div>
+            <div class="rTableCellOdd center-text">0.42%</div>
+            <div class="rTableCellOdd center-text">&nbsp;</div>
+        </div>
+        <div class="rTableRow widgetTable">
+            <div class="rTableCell widgetTableHeader" style="text-align:right;"><strong>TOTAL</strong></div>
+            <div class="rTableCell center-text"><strong>770</strong></div>
+            <div class="rTableCell center-text"><strong>770</strong></div>
+            <div class="rTableCell center-text"><strong>30</strong></div>
+            <div class="rTableCell center-text"><strong>4.17%</strong></div>
+            <div class="rTableCell center-text"><strong>30</strong></div>
+            <div class="rTableCell center-text"><strong>4.17%</strong></div>
+            <div class="rTableCell center-text">&nbsp;</div>
+        </div>
+    </div>	
+</div>
+
+<div id="hidden_model_geo" class="hidden">
+    <form action="" class="form widgetTable">
+        <div class="col-xs-12 col-lg-6 center-text">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d469.0012983139663!2d-71.071958512878!3d42.36124351516361!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDIxJzQwLjUiTiA3McKwMDQnMTguMSJX!5e1!3m2!1sen!2sus!4v1461170104259" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+        <div class="col-xs-12 col-lg-6 center-text">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d895944.5793260589!2d-71.68855259300295!3d42.37261860272273!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDIxJzQwLjUiTiA3McKwMDQnMTguMSJX!5e0!3m2!1sen!2sus!4v1461170166713" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    </form>
+</div>
+<!-- MODAL LAYOUTS END //-->
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<script src="js/bootstrap-notify.js"></script>
+
+<script src="js/engine.js"></script>
+<script src="js/data.js"></script>
+<script src="js/contract_bid_items.js"></script>
+
 </body>
 </html>
